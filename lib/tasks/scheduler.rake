@@ -5,7 +5,8 @@ task check_hour_traffic_quality: :environment do
   @date_to=Time.now.strftime("%m/%d/%Y %H:%M")
   
   @body = Sonus.DestinationClient(@date_from, @date_to)
-  AlertMailer.alert(@date_from, @date_to, 'mvar78@gmail.com' , "Quality Alert", @body).deliver_now
+  ['mvar78@gmail.com', 'dario.ceccaroni@areaattiva.it']
+  AlertMailer.alert(@date_from, @date_to, ['mvar78@gmail.com', 'dario.ceccaroni@areaattiva.it'] , "Quality Alert", @body).deliver_now
 end
 
 
@@ -16,7 +17,7 @@ task check_today_traffic_quality: :environment do
   @date_to=Time.now.strftime("%m/%d/%Y 23:59")
   
   @body = Sonus.DestinationClient(@date_from, @date_to)
-  AlertMailer.alert(@date_from, @date_to, 'mvar78@gmail.com' , "Traffic Report", @body).deliver_now
+  AlertMailer.alert(@date_from, @date_to, ['mvar78@gmail.com', 'dario.ceccaroni@areaattiva.it'] , "Traffic Report", @body).deliver_now
 end
 
 
@@ -27,5 +28,5 @@ task check_yesterday_traffic_quality: :environment do
   @date_to=1.day.ago.strftime("%m/%d/%Y 23:59")
   
   @body = Sonus.DestinationClient(@date_from, @date_to)
-  AlertMailer.alert(@date_from, @date_to, 'mvar78@gmail.com' , "Traffic Report", @body).deliver_now
+  AlertMailer.alert(@date_from, @date_to, ['mvar78@gmail.com', 'dario.ceccaroni@areaattiva.it'] , "Traffic Report", @body).deliver_now
 end
