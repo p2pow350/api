@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  	<p><b>From: </b><%= @date_from %></p>
+  	<p><b>To:   </b><%= @date_to %></p>
+  	
+	<table border="1">
+	  <thead>
+		<tr>
+		  <th>CLIENTE</th>
+		  <th>FATTURATO</th>
+		</tr>
+	  </thead>
+	  <tbody>
+	  <% color="white"
+  		 totals = 0
+	  %>		
+	  <% @body.each_pair do |key, value| %>
+		  <tr class="collapsing">
+			  <td style="background-color: <%= color %>;"><%= key %></td>
+			  <td align="right" style="background-color: <%= color %>;"><%= value.round(2) %></td>
+			  
+			  <% totals += value %>
+		  </tr>
+	  <% end %>
+	  
+	  </tbody>
+	  <tfoot>
+		  <tr class="collapsing">
+			<td>TOTALE (<%= @body.count %> elementi)</td>
+			<td align="right"><%= totals.round(2) %></td>
+		  </tr>
+	  </tfoot>
+	</table>
+	
+  </body>
+</html>

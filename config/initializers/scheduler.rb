@@ -15,6 +15,12 @@ unless scheduler.down?
 		system("rake check_today_traffic_quality")
 	end
 
+	# every morning
+	scheduler.cron '00 09 * * *' do
+		# do stuff
+		system("rake check_yesterday_client_usage")
+	end	
+	
 end
 
 

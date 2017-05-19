@@ -54,8 +54,30 @@ class Sonus
 	end
 	
 	
-	
-	
+	def self.FinancialReport_ClientUsage(date_from, date_to)
+		date_from=html(date_from)
+		date_to=html(date_to)
+		
+		response = HTTParty.get(
+			"#{Rails.application.config.S_BASE_URL}FinancialReport;username=#{Rails.application.config.S_USERNAME};password=#{Rails.application.config.S_PASSWORD};dateFrom=#{date_from};dateTo=#{date_to}", 
+			:headers => { 'Content-Type' => 'application/json' } 
+		)
+				
+		r = response.parsed_response["financialReportRecords"]["financialReportRecord"]
+		
+		# group by customer / usage
+		_r = r.group_by{|h| h["client"]}.each{|_, v| v.map!{|h| h["clientUsage"]}}
+		
+		# new empty hash
+		totals = Hash.new
+		
+		# summarize by totals
+		_r.each do |key, value|
+			 sum = value.map(&:to_f).reduce(:+)
+			 totals[key] = sum
+		end
+		return totals
+	end	
 	
 	
 	
