@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  	<p><b>From: </b><%= @date_from %></p>
+  	<p><b>To:   </b><%= @date_to %></p>
+  	
+	<table border="1">
+	  <thead>
+		<tr>
+		  <th>CLIENTE</th>
+		  <th>DESTINAZIONE</th>
+		  <th>CHIAMATE</th>
+		  <th>ANSWER</th>
+		  <th>MINUTI</th>
+		  <th>ASR</th>
+		  <th>ACD</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		<% @body.each_with_index do |r, i| %>
+
+		  <%
+		  if (@body[i]["total"].to_i > 20) && ((@body[i]["clientCompletion"].to_i < 20) || (@body[i]["avgDurationMinutes"].to_f < 1))
+		    color="#CC6600"
+		  else
+		    color="white"
+		  end
+		  %>		
+		
+		  <tr class="collapsing">
+			<td style="background-color: <%= color %>;"><%= @body[i]["client"] %></td>
+			<td style="background-color: <%= color %>;"><%= @body[i]["destination"] %></td>
+			<td style="background-color: <%= color %>;" align="right"><%= @body[i]["total"] %></td>
+			<td style="background-color: <%= color %>;" align="right"><%= @body[i]["completed"] %></td>
+			<td style="background-color: <%= color %>;" align="right"><%= @body[i]["durationMinutes"] %></td>
+			<td style="background-color: <%= color %>;" align="right"><%= @body[i]["clientCompletion"] %></td>
+			<td style="background-color: <%= color %>;" align="right"><%= @body[i]["avgDurationMinutes"] %></td>
+		  </tr>
+		<% end %>
+	  </tbody>
+	  <tfoot>
+		  <tr class="collapsing">
+			<td colspan="2">TOTALE (<%= @body.count %> elementi)</td>
+			<td align="right"><%= @body.map {|s| s['total'].to_i}.reduce(0, :+) %></td>
+			<td align="right"><%= @body.map {|s| s['completed'].to_i}.reduce(0, :+) %></td>
+			<td align="right"><%= (@body.map {|s| s['durationMinutes'].to_f}.reduce(0, :+)).round(2) %></td>
+			<td align="right"><%= (( @body.map {|s| s['completed'].to_f}.reduce(0, :+) / @body.map {|s| s['total'].to_f}.reduce(0, :+) ) * 100).round(2) %></td>
+			<td align="right"><%= (@body.map {|s| s['durationMinutes'].to_f}.reduce(0, :+) / @body.map {|s| s['completed'].to_i}.reduce(0, :+)).round(2) %></td>
+		  </tr>
+	  </tfoot>
+	</table>
+	
+  </body>
+</html>
