@@ -5,7 +5,6 @@ task check_hour_traffic_quality: :environment do
   @date_to=Time.now.strftime("%m/%d/%Y %H:%M")
   
   @body = Sonus.DestinationClient(@date_from, @date_to)
-  ['mvar78@gmail.com', 'dario.ceccaroni@areaattiva.it']
   AlertMailer.alert(@date_from, @date_to, ['mvar78@gmail.com', 'dario.ceccaroni@areaattiva.it'] , "Quality Alert", @body).deliver_now
 end
 
