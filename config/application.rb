@@ -31,7 +31,12 @@ module SonusApi
     config.S_BASE_URL = "https://38.105.229.6/SonusWebServices/webresource/"
 	config.S_USERNAME = 'ARE_29202'
 	config.S_PASSWORD = 'AnDrEa_8547'
-    
-    
+	
+    config.time_zone = 'Rome'
+    config.active_record.default_timezone = :local
+
+    config.i18n.default_locale = :it
+    config.i18n.fallbacks = [:en]
+
   end
 end

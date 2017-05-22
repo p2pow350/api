@@ -10,7 +10,7 @@ unless scheduler.down?
 	end
 	
 	# every morning
-	scheduler.cron '00 09 * * *' do
+	scheduler.cron '50 08 * * *' do
 		# do stuff
 		system("rake check_today_traffic_quality")
 	end
