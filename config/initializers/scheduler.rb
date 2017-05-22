@@ -1,6 +1,8 @@
+require 'rubygems'
 require 'rufus-scheduler'
 
-scheduler = Rufus::Scheduler.new(:lockfile => ".rufus-scheduler.lock")
+#scheduler = Rufus::Scheduler.new(:lockfile => ".rufus-scheduler.lock")
+scheduler = Rufus::Scheduler.new
 
 unless scheduler.down?
 	# every hour - Mon-Tue (10:00 to 19:00)
@@ -22,5 +24,4 @@ unless scheduler.down?
 	end	
 	
 end
-
 
