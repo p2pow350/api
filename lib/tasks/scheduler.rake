@@ -1,7 +1,7 @@
 task check_hour_traffic_quality: :environment do
   p Time.now.to_s + " - Task: Check Traffic Quality.."
   
-  @date_from=1.hours.ago.strftime("%m/%d/%Y %H:%M")
+  @date_from=2.hours.ago.strftime("%m/%d/%Y %H:%M")
   @date_to=Time.now.strftime("%m/%d/%Y %H:%M")
   
   @body = Sonus.DestinationClient(@date_from, @date_to)
