@@ -22,4 +22,4 @@ scheduler.cron '00 09 * * *' do
 	system("rake check_yesterday_client_usage")
 end	
 
-scheduler.join
+#scheduler.join
