@@ -1,4 +1,3 @@
-require 'rubygems'
 require 'rufus-scheduler'
 
 #scheduler = Rufus::Scheduler.new(:lockfile => ".rufus-scheduler.lock")
@@ -22,8 +21,5 @@ scheduler.cron '00 09 * * *' do
 	system("rake check_yesterday_client_usage")
 end	
 
-scheduler.interval '1s' do
-  Rails.logger.debug "I assure you! It's #{Time.now}"
-end
 
 #scheduler.join
