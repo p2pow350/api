@@ -22,4 +22,8 @@ scheduler.cron '00 09 * * *' do
 end	
 
 
+scheduler.interval '1s' do
+  Rails.logger.debug "I assure you! It's #{Time.now}"
+end
+
 #scheduler.join
