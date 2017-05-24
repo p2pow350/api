@@ -53,6 +53,28 @@ class Sonus
 		return r
 	end
 	
+
+	def self.FinancialReportNegative(date_from, date_to)
+		date_from=html(date_from)
+		date_to=html(date_to)
+		
+		response = HTTParty.get(
+			"#{Rails.application.config.S_BASE_URL}FinancialReport;username=#{Rails.application.config.S_USERNAME};password=#{Rails.application.config.S_PASSWORD};dateFrom=#{date_from};dateTo=#{date_to}", 
+			:headers => { 'Content-Type' => 'application/json' } 
+		)
+				
+		r = response.parsed_response["financialReportRecords"]["financialReportRecord"]
+		
+		@out = []
+		r.each_with_index do |d, i|
+			# only negative margins
+			if (r[i]["clientUsage"].to_f - r[i]["carrierUsage"].to_f ) <= 0.0
+			  @out << d
+			end
+		end
+		return @out
+		
+	end	
 	
 	def self.FinancialReport_ClientUsage(date_from, date_to)
 		date_from=html(date_from)

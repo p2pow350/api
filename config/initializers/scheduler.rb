@@ -14,6 +14,13 @@ scheduler.cron '0 10-19/1 * * 1-5' do
     Rake::Task['check_hour_traffic_quality'].invoke
 end
 
+# every hour - Every Day (09:00 to 19:00)
+scheduler.cron '0 09-19/1 * * *' do
+	# do stuff
+    Rake::Task['check_negative_margins'].reenable
+    Rake::Task['check_negative_margins'].invoke
+end
+
 # every morning Mon-Fri (9:00)
 scheduler.cron '09 00 * * 1-5' do
 	# do stuff

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  	<p><b>From: </b><%= @date_from %></p>
+  	<p><b>To:   </b><%= @date_to %></p>
+  	
+	<table border="1">
+	  <thead>
+		<tr>
+		  <th>Cliente</th>
+		  <th>Destinazione</th>
+		  <th>Fornitore</th>
+		  <th>Ricavo</th>
+		  <th>Costo</th>
+		  <th>Rate C</th>
+		  <th>Rate F</th>
+		  <th>Minuti</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		<% @body.each_with_index do |r, i| %>
+
+		  <%
+		    color="white"
+		  %>		
+		
+		  <tr class="collapsing">
+			<td style="background-color: <%= color %>;"><%= @body[i]["client"] %></td>
+			<td style="background-color: <%= color %>;"><%= @body[i]["clientDestination"] %></td>
+			<td style="background-color: <%= color %>;" align="right"><%= @body[i]["carrier"] %></td>
+			<td style="background-color: <%= color %>;" align="right"><%= @body[i]["clientUsage"] %></td>
+			<td style="background-color: <%= color %>;" align="right"><%= @body[i]["carrierUsage"] %></td>
+			<td style="background-color: <%= color %>;" align="right"><%= @body[i]["clientRate"] %></td>
+			<td style="background-color: <%= color %>;" align="right"><%= @body[i]["carrierRate"] %></td>
+			<td style="background-color: <%= color %>;" align="right"><%= @body[i]["clientMinutes"] %></td>
+		  </tr>
+		<% end %>
+	  </tbody>
+	  <tfoot>
+		  <tr class="collapsing">
+			<td colspan="3">TOTALE (<%= @body.count %> elementi)</td>
+			<td align="right"><%= @body.map {|s| s['clientUsage'].to_f}.reduce(0, :+) %></td>
+			<td align="right"><%= @body.map {|s| s['carrierUsage'].to_f}.reduce(0, :+) %></td>
+			<td colspan="2"></td>
+			<td align="right"><%= @body.map {|s| s['clientMinutes'].to_f}.reduce(0, :+) %></td>
+		  </tr>
+	  </tfoot>
+	</table>
+	
+  </body>
+</html>
