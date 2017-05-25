@@ -42,10 +42,10 @@
 	  <tfoot>
 		  <tr class="collapsing">
 			<td colspan="3">TOTALE (<%= @body.count %> elementi)</td>
-			<td align="right"><%= @body.map {|s| s['clientUsage'].to_f}.reduce(0, :+) %></td>
-			<td align="right"><%= @body.map {|s| s['carrierUsage'].to_f}.reduce(0, :+) %></td>
+			<td align="right"><%= @body.map {|s| s['clientUsage'].to_f}.reduce(0, :+).round(2) %></td>
+			<td align="right"><%= @body.map {|s| s['carrierUsage'].to_f}.reduce(0, :+).round(2) %></td>
 			<td colspan="2"></td>
-			<td align="right"><%= @body.map {|s| s['clientMinutes'].to_f}.reduce(0, :+) %></td>
+			<td align="right"><%= @body.map {|s| s['clientMinutes'].to_f}.reduce(0, :+).round(2) %></td>
 		  </tr>
 	  </tfoot>
 	</table>

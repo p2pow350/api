@@ -68,7 +68,7 @@ class Sonus
 		@out = []
 		r.each_with_index do |d, i|
 			# only negative margins
-			if (r[i]["clientUsage"].to_f - r[i]["carrierUsage"].to_f ) <= 0.0
+			if (r[i]["clientUsage"].to_f - r[i]["carrierUsage"].to_f ) < 0.0
 			  @out << d
 			end
 		end
