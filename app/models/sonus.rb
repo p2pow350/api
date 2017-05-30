@@ -1,26 +1,6 @@
 class Sonus
-	
-	def self.colorize_asr(value)
-		case value.to_i
-		when 0..20
-		  "red"
-		when 21..50
-		  "yellow"
-		else
-		  "green"
-		end		
-	end	
-  	
-	def self.colorize_acd(value)
-		case value.to_f
-		when 0..1
-		  "orange"
-		else
-		  "lightgreen"
-		end		
-	end	
-	
-	
+	default_timeout 30
+		
 	def self.DestinationClient(date_from, date_to)
 		date_from=html(date_from)
 		date_to=html(date_to)
@@ -101,6 +81,29 @@ class Sonus
 		return totals
 	end	
 	
+	
+	
+	
+	def self.colorize_asr(value)
+		case value.to_i
+		when 0..20
+		  "red"
+		when 21..50
+		  "yellow"
+		else
+		  "green"
+		end		
+	end	
+  	
+	def self.colorize_acd(value)
+		case value.to_f
+		when 0..1
+		  "orange"
+		else
+		  "lightgreen"
+		end		
+	end	
+
 	
 	
 private
