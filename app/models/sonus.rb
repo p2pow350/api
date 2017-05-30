@@ -1,5 +1,4 @@
 class Sonus
-	default_timeout 30
 		
 	def self.DestinationClient(date_from, date_to)
 		date_from=html(date_from)
