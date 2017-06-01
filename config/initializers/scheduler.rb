@@ -22,14 +22,14 @@ scheduler.cron '0 09-19/1 * * *' do
 end
 
 # every morning Mon-Fri (9:00)
-scheduler.cron '09 00 * * 1-5' do
+scheduler.cron '00 09 * * 1-5' do
 	# do stuff
     Rake::Task['check_today_traffic_quality'].reenable
     Rake::Task['check_today_traffic_quality'].invoke
 end
 
 # Saturday-Sunday (12:00, 19:00)
-scheduler.cron '12,19 00 * * 6-7' do
+scheduler.cron '00 12,19 * * 6-7' do
 	# do stuff
     Rake::Task['check_today_traffic_quality'].reenable
     Rake::Task['check_today_traffic_quality'].invoke

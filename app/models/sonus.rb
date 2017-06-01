@@ -5,7 +5,8 @@ class Sonus
 		date_to=html(date_to)
 		
 		response = HTTParty.get(
-			"#{Rails.application.config.S_BASE_URL}DestinationClient;username=#{Rails.application.config.S_USERNAME};password=#{Rails.application.config.S_PASSWORD};dateFrom=#{date_from};dateTo=#{date_to}", 
+			"#{Rails.application.config.S_BASE_URL}DestinationClient;username=#{Rails.application.config.S_USERNAME};password=#{Rails.application.config.S_PASSWORD};dateFrom=#{date_from};dateTo=#{date_to}",
+			timeout: 60, 
 			:headers => { 'Content-Type' => 'application/json' } 
 		)
 		
