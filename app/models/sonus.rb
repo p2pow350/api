@@ -26,6 +26,7 @@ class Sonus
 		
 		response = HTTParty.get(
 			"#{Rails.application.config.S_BASE_URL}FinancialReport;username=#{Rails.application.config.S_USERNAME};password=#{Rails.application.config.S_PASSWORD};dateFrom=#{date_from};dateTo=#{date_to}", 
+			timeout: 60, 
 			:headers => { 'Content-Type' => 'application/json' } 
 		)
 				
@@ -40,6 +41,7 @@ class Sonus
 		
 		response = HTTParty.get(
 			"#{Rails.application.config.S_BASE_URL}FinancialReport;username=#{Rails.application.config.S_USERNAME};password=#{Rails.application.config.S_PASSWORD};dateFrom=#{date_from};dateTo=#{date_to}", 
+			timeout: 60, 
 			:headers => { 'Content-Type' => 'application/json' } 
 		)
 				
@@ -62,6 +64,7 @@ class Sonus
 		
 		response = HTTParty.get(
 			"#{Rails.application.config.S_BASE_URL}FinancialReport;username=#{Rails.application.config.S_USERNAME};password=#{Rails.application.config.S_PASSWORD};dateFrom=#{date_from};dateTo=#{date_to}", 
+			timeout: 60, 
 			:headers => { 'Content-Type' => 'application/json' } 
 		)
 				
