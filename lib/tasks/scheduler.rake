@@ -37,7 +37,7 @@ end
 
 task check_past_month_client_usage: :environment do
   @date_from=Date.today.at_beginning_of_month.last_month.strftime("%m/%d/%Y 00:00")
-  @date_to=Date.today.at_end_of_month.last_month.strftime("%m/%d/%Y 23:59")
+  @date_to=(Time.now - 1.month).at_end_of_month.strftime("%m/%d/%Y 23:59")
   
   @body = Sonus.FinancialReport_ClientUsage(@date_from, @date_to)
   ClientUsageMailer.client_usage(@date_from, @date_to, ['noc@areaattiva.it', 'andrea.cavaliere@areaattiva.it', 'dario.ceccaroni@areaattiva.it'] , "Past Month Client Usage", @body).deliver_now
