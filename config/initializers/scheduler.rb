@@ -4,7 +4,6 @@ require 'rufus-scheduler'
 
 load File.join(Rails.root, 'Rakefile')
 
-
 scheduler = Rufus::Scheduler.singleton
 
 # every hour - Mon-Fri (10:00 to 19:00)
@@ -22,14 +21,14 @@ scheduler.cron '0 09-19/1 * * *' do
 end
 
 # every morning Mon-Fri (9:00)
-scheduler.cron '00 09 * * 1-5' do
+scheduler.cron '59 08 * * 1-5' do
 	# do stuff
     Rake::Task['check_today_traffic_quality'].reenable
     Rake::Task['check_today_traffic_quality'].invoke
 end
 
 # Saturday-Sunday (12:00, 19:00)
-scheduler.cron '00 12,19 * * 6-7' do
+scheduler.cron '0 12,19 * * 6-7' do
 	# do stuff
     Rake::Task['check_today_traffic_quality'].reenable
     Rake::Task['check_today_traffic_quality'].invoke
@@ -38,7 +37,7 @@ end
 
 
 # every morning Mon-Fri (08:00)
-scheduler.cron '00 08 * * 1-5' do
+scheduler.cron '0 08 * * 1-5' do
 	# do stuff
     Rake::Task['check_yesterday_client_usage'].reenable
     Rake::Task['check_yesterday_client_usage'].invoke
