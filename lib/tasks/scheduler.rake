@@ -35,6 +35,15 @@ task check_yesterday_client_usage: :environment do
 end
 
 
+task check_past_month_client_usage: :environment do
+  @date_from=Date.today.at_beginning_of_month.last_month.strftime("%m/%d/%Y 00:00")
+  @date_to=Date.today.at_end_of_month.last_month.strftime("%m/%d/%Y 23:59")
+  
+  @body = Sonus.FinancialReport_ClientUsage(@date_from, @date_to)
+  ClientUsageMailer.client_usage(@date_from, @date_to, ['noc@areaattiva.it', 'andrea.cavaliere@areaattiva.it', 'dario.ceccaroni@areaattiva.it'] , "Past Month Client Usage", @body).deliver_now
+end
+
+
 # NOT YET USED
 task check_yesterday_traffic_quality: :environment do
   p Time.now.to_s + " - Task: Check Daily Traffic Quality.."

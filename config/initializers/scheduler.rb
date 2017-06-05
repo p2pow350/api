@@ -50,4 +50,17 @@ scheduler.cron '00 10 * * 6-7' do
     Rake::Task['check_yesterday_client_usage'].invoke
 end	
 
+
+
+# First Day of the Month (09:30)
+scheduler.cron '30 9 1 * *' do
+	# do stuff
+    Rake::Task['check_past_month_client_usage'].reenable
+    Rake::Task['check_past_month_client_usage'].invoke
+end	
+
+
+
+
+
 #scheduler.join
