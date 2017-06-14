@@ -1,9 +1,12 @@
-task check_hour_traffic_quality: :environment do
-  @date_from=3.hours.ago.strftime("%m/%d/%Y %H:%M")
-  @date_to=2.hours.ago.strftime("%m/%d/%Y %H:%M")
+
+task :check_hour_traffic_quality, [:frequency, :recipients] => [:environment] do |t, args|	
+  gmt=(args.frequency.to_i+args.frequency.to_i)
+  
+  @date_from=(gmt+args.frequency.to_i).minutes.ago.strftime("%m/%d/%Y %H:%M")
+  @date_to=(gmt).minutes.ago.strftime("%m/%d/%Y %H:%M")
   
   @body = Sonus.DestinationClient(@date_from, @date_to)
-  AlertMailer.alert(@date_from, @date_to, ['noc@areaattiva.it', 'dario.ceccaroni@areaattiva.it'] , "Quality Alert", @body).deliver_now
+  AlertMailer.alert(@date_from, @date_to, args.recipients , "Quality Alert", @body).deliver_now
 end
 
 task check_negative_margins: :environment do

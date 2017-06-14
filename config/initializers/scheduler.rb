@@ -7,11 +7,21 @@ load File.join(Rails.root, 'Rakefile')
 scheduler = Rufus::Scheduler.singleton
 
 # every hour - Mon-Fri (10:00 to 19:00)
+# NOC
 scheduler.cron '0 10-19/1 * * 1-5' do
 	# do stuff
     Rake::Task['check_hour_traffic_quality'].reenable
-    Rake::Task['check_hour_traffic_quality'].invoke
+    Rake::Task['check_hour_traffic_quality'].invoke(60, ['noc@areaattiva.it'])
 end
+
+# every two hours - Mon-Fri (10:00 to 19:00)
+# SALES
+scheduler.cron '0 10-19/2 * * 1-5' do
+	# do stuff
+    Rake::Task['check_hour_traffic_quality'].reenable
+    Rake::Task['check_hour_traffic_quality'].invoke(120, ['dario.ceccaroni@areaattiva.it'])
+end
+
 
 # every hour - Every Day (09:00 to 19:00)
 scheduler.cron '0 09-19/1 * * *' do
