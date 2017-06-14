@@ -23,10 +23,10 @@ end
 
 
 # every 15 minutes - Every Day (09:00 to 19:00)
-# scheduler.cron '*/15 09-19/1 * * *' do
-scheduler.cron '0 09-19/1 * * *' do
+scheduler.cron '*/15 09-19/1 * * *' do
+# scheduler.cron '0 09-19/1 * * *' do
     Rake::Task['check_negative_margins'].reenable
-    Rake::Task['check_negative_margins'].invoke(['noc@areaattiva.it', 'dario.ceccaroni@areaattiva.it'])
+    Rake::Task['check_negative_margins'].invoke(15, ['noc@areaattiva.it', 'dario.ceccaroni@areaattiva.it'])
 end
 
 # every morning Mon-Fri (8:59)

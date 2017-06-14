@@ -9,9 +9,10 @@ task :check_hour_traffic_quality, [:frequency, :recipients] => [:environment] do
   AlertMailer.alert(@date_from, @date_to, args.recipients , "Quality Alert", @body).deliver_now
 end
 
-task :check_negative_margins, [:recipients] => [:environment] do |t, args|
-  @date_from=3.hours.ago.strftime("%m/%d/%Y %H:%M")
-  @date_to=2.hours.ago.strftime("%m/%d/%Y %H:%M")
+task :check_negative_margins, [:frequency, :recipients] => [:environment] do |t, args|
+  @past_date=2.hours.ago
+  @date_from=(@past_date-args.frequency.to_i.minutes).strftime("%m/%d/%Y %H:%M")
+  @date_to=@past_date.strftime("%m/%d/%Y %H:%M")
   
   @body = Sonus.FinancialReportNegative(@date_from, @date_to)
   unless @body.empty? 
