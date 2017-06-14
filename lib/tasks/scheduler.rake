@@ -14,6 +14,8 @@ task :check_negative_margins, [:frequency, :recipients] => [:environment] do |t,
   @date_from=(@past_date-args.frequency.to_i.minutes).strftime("%m/%d/%Y %H:%M")
   @date_to=@past_date.strftime("%m/%d/%Y %H:%M")
   
+  p @date_from
+  p @date_to
   @body = Sonus.FinancialReportNegative(@date_from, @date_to)
   unless @body.empty? 
   	  NegativeMarginsMailer.negative_margins(@date_from, @date_to, args.recipients, "Negative Margins", @body).deliver_now
