@@ -154,7 +154,6 @@ DEPENDENCIES
   nokogiri
   premailer-rails
   rails (~> 5.0.3)
-  rb-fsevent (<= 0.9.4)
   rufus-scheduler
   spring
   spring-watcher-listen (~> 2.0.0)

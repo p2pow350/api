@@ -6,7 +6,8 @@ class Sonus
 		
 		response = HTTParty.get(
 			"#{Rails.application.config.S_BASE_URL}DestinationClient;username=#{Rails.application.config.S_USERNAME};password=#{Rails.application.config.S_PASSWORD};dateFrom=#{date_from};dateTo=#{date_to}",
-			timeout: 60, 
+			timeout: 60,
+			verify: false,
 			:headers => { 'Content-Type' => 'application/json' } 
 		)
 		
@@ -18,7 +19,30 @@ class Sonus
 		end
 		return @out
 	end
-	
+
+	def self.DestinationCarrier(date_from, date_to)
+		date_from=html(date_from)
+		date_to=html(date_to)
+		
+		response = HTTParty.get(
+			"#{Rails.application.config.S_BASE_URL}DestinationCarrier;username=#{Rails.application.config.S_USERNAME};password=#{Rails.application.config.S_PASSWORD};dateFrom=#{date_from};dateTo=#{date_to}",
+			timeout: 60,
+			verify: false,
+			:headers => { 'Content-Type' => 'application/json' } 
+		)
+		
+		begin
+			r = response.parsed_response["destinationCarriers"]["destinationCarrier"]
+		rescue
+			r =[]
+		end
+		
+		@out = []
+		r.each_with_index do |d, i|
+			@out << d unless r[i]["destination"].downcase.include? 'total'
+		end
+		return @out
+	end		
 
 	def self.FinancialReport(date_from, date_to)
 		date_from=html(date_from)
@@ -26,7 +50,8 @@ class Sonus
 		
 		response = HTTParty.get(
 			"#{Rails.application.config.S_BASE_URL}FinancialReport;username=#{Rails.application.config.S_USERNAME};password=#{Rails.application.config.S_PASSWORD};dateFrom=#{date_from};dateTo=#{date_to}", 
-			timeout: 60, 
+			timeout: 60,
+verify: false,
 			:headers => { 'Content-Type' => 'application/json' } 
 		)
 				
@@ -41,7 +66,9 @@ class Sonus
 		
 		response = HTTParty.get(
 			"#{Rails.application.config.S_BASE_URL}FinancialReport;username=#{Rails.application.config.S_USERNAME};password=#{Rails.application.config.S_PASSWORD};dateFrom=#{date_from};dateTo=#{date_to}", 
-			timeout: 60, 
+			timeout: 60,
+verify: false,
+ 
 			:headers => { 'Content-Type' => 'application/json' } 
 		)
 				
@@ -64,7 +91,9 @@ class Sonus
 		
 		response = HTTParty.get(
 			"#{Rails.application.config.S_BASE_URL}FinancialReport;username=#{Rails.application.config.S_USERNAME};password=#{Rails.application.config.S_PASSWORD};dateFrom=#{date_from};dateTo=#{date_to}", 
-			timeout: 60, 
+			timeout: 60,
+verify: false,
+ 
 			:headers => { 'Content-Type' => 'application/json' } 
 		)
 				
